@@ -10,7 +10,10 @@ function searchClick (e) {
     
     searchBar.value = ''
 
-    fetch(apiURL + query, header)
+    fetch(apiURL + query, {
+        method: "GET",
+        headers: {header, acOrigin, acHeaders, acMethods}
+    })
     .then((res) => res.json())
     .then((res) => {
         console.log(res)
