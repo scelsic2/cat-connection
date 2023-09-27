@@ -1,0 +1,17 @@
+const router = require('express').Router();
+
+// GET all from search
+router.get('search/:id', async(req, res) => {
+    const apiURL = `https://api.petfinder.com/v2/animals?type=`
+    let query = req.params.key;
+    let searchAddress = apiURL+query
+
+    await fetch(searchAddress)
+        .then((res) => res.json())
+        .then((data) => {
+            console.log(data)
+            res.render('index', data)
+        })
+})
+
+module.exports = router;

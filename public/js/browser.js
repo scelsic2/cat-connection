@@ -1,5 +1,6 @@
 const searchBar = document.querySelector('#search-bar')
 const searchBtn = document.querySelector('#search-btn')
+const headers = `Authorization: Bearer ${accessToken}`
 
 let searchResults = []
 
@@ -7,21 +8,19 @@ function searchClick (e) {
     e.preventDefault()
     const query = searchBar.value
     console.log(query)
+
+    const searchAddress = apiURL + query
     
     searchBar.value = ''
 
-    fetch(apiURL + query, {
-        method: "GET",
-        headers: {header, acOrigin, acHeaders, acMethods}
-    })
+    fetch(searchAddress)
     .then((res) => res.json())
-    .then((res) => {
-        console.log(res)
+    .then((data) => {
+      console.log(data);
     })
-    .catch((err) => {
-        console.error(err)
-    })
-        
+    .catch((error) => {
+      console.error("Error fetching data: ", error);
+    });
 }
 
 function searchKey (e) {
